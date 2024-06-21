@@ -11,17 +11,21 @@ import pandas as pd
 from datetime import date
 import os
 
+#Specify the name of the source file here
+SOURCE_FILE = "PowerBIExcelSource.xlsx"
+
 #set date to track when files were made
 today = str(date.today())
 
-#create a new folder with the current date
+#create a new folder with the current date if it doesnt exist yet
 newpath = today
 if not os.path.exists(newpath):
     os.makedirs(newpath)
 
-#looks for the source Excel in the same folder as the script
-read_file = pd.read_excel("PowerBIExcelSource.xlsx", sheet_name=None, header=0)
-#defines the location of the result
+#reads for the source Excel
+read_file = pd.read_excel(SOURCE_FILE, sheet_name=None, header=0)
+#creates .csvs from the source file sheets and adds them to the folder
 for sheet_name, data in read_file.items():
     data.to_csv(f"{today}/{sheet_name}.csv", index=False)
+
     
