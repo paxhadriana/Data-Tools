@@ -32,16 +32,24 @@ def extract():
     print("Hello friend user! \nThis script will export individual sheets from the source Excel to their own .csv files.\n")
     print("The file to be processed is currently set to: " + DEFAULT + "\n")
     print("Is this correct? (Y/N) ")
-    answer = input()
-    while (str(answer).lower() != "N".lower()) and (str(answer).lower() != "Y".lower()):
+    #strip and upper the input to minimize error
+    answer = str(input()).strip().upper()
+    while (answer != "N") and (answer != "Y"):
         answer = str(input("Please confirm 'Y' or 'N'. "))
-    if str(answer).lower() == "N".lower():
+    if answer == "N":
         print("Enter the name of the source file including the .extension: ")   
         source_file = input()
-    elif str(answer).lower() == "Y".lower():
+        #check whether the source can be found to prevent FileNotFoundErrors
+        while not os.path.exists(source_file):
+            print("That file cannot be found in the folder. Please enter the name again: ")
+            source_file = str(input()).strip()
+    elif answer == "Y":
             source_file = DEFAULT
+            while not os.path.exists(source_file):
+                print("That file cannot be found in the folder. Please enter a new file source: ")
+                source_file = str(input()).strip()
     print("\nThe script will now extract the sheets from " + source_file)
-        
+    
     #reads for the source Excel
     read_file = pd.read_excel(source_file, sheet_name=None, header=0)
     #creates .csvs from the source file sheets and adds them to the folder
