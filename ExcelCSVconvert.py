@@ -11,21 +11,35 @@ import pandas as pd
 from datetime import date
 import os
 
-#Specify the name of the source file here
-SOURCE_FILE = "PowerBIExcelSource.xlsx"
+#Specify the name of the default source file here
+DEFAULT = "PowerBIExcelSource.xlsx"
 
 #set date to track when files were made
-today = str(date.today())
+TODAY = str(date.today())
 
-#create a new folder with the current date if it doesnt exist yet
-newpath = today
-if not os.path.exists(newpath):
-    os.makedirs(newpath)
+def main():
+    folder()
+    extract()
 
+#then create a new folder with the current date if it doesnt exist yet
+def folder():
+    newpath = TODAY
+    if not os.path.exists(newpath):
+        os.makedirs(newpath)
+
+#verify the source then extract it to the folder
+def extract():
+    print("The file to be extracted is currently set to: " + DEFAULT)
+    answer = input("Is this correct? (Y/N) ")
+    if str(answer) == "N":
+        source_file = input("Enter the name of the source file including the .extension: ")
+    elif str(answer) == "Y":
+        source_file = DEFAULT
 #reads for the source Excel
-read_file = pd.read_excel(SOURCE_FILE, sheet_name=None, header=0)
+    read_file = pd.read_excel(source_file, sheet_name=None, header=0)
 #creates .csvs from the source file sheets and adds them to the folder
-for sheet_name, data in read_file.items():
-    data.to_csv(f"{today}/{sheet_name}.csv", index=False)
-
+    for sheet_name, data in read_file.items():
+        data.to_csv(f"{TODAY}/{sheet_name}.csv", index=False)
     
+if __name__ == '__main__':
+    main()
