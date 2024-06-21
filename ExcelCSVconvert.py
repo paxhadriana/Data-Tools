@@ -21,25 +21,34 @@ def main():
     folder()
     extract()
 
-#then create a new folder with the current date if it doesnt exist yet
+#create a new folder with the current date if it doesnt exist yet
 def folder():
-    newpath = TODAY
-    if not os.path.exists(newpath):
-        os.makedirs(newpath)
+    folderpath = TODAY
+    if not os.path.exists(folderpath):
+        os.makedirs(folderpath)
 
 #verify the source then extract it to the folder
 def extract():
-    print("The file to be extracted is currently set to: " + DEFAULT)
-    answer = input("Is this correct? (Y/N) ")
-    if str(answer) == "N":
-        source_file = input("Enter the name of the source file including the .extension: ")
-    elif str(answer) == "Y":
-        source_file = DEFAULT
-#reads for the source Excel
+    print("Hello friend user! \nThis script will export individual sheets from the source Excel to their own .csv files.\n")
+    print("The file to be processed is currently set to: " + DEFAULT + "\n")
+    print("Is this correct? (Y/N) ")
+    answer = input()
+    while (str(answer).lower() != "N".lower()) and (str(answer).lower() != "Y".lower()):
+        answer = str(input("Please confirm 'Y' or 'N'. "))
+    if str(answer).lower() == "N".lower():
+        print("Enter the name of the source file including the .extension: ")   
+        source_file = input()
+    elif str(answer).lower() == "Y".lower():
+            source_file = DEFAULT
+    print("\nThe script will now extract the sheets from " + source_file)
+        
+    #reads for the source Excel
     read_file = pd.read_excel(source_file, sheet_name=None, header=0)
-#creates .csvs from the source file sheets and adds them to the folder
+    #creates .csvs from the source file sheets and adds them to the folder
     for sheet_name, data in read_file.items():
         data.to_csv(f"{TODAY}/{sheet_name}.csv", index=False)
+
+    print("Extract complete.")
     
 if __name__ == '__main__':
     main()
