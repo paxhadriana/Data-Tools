@@ -4,8 +4,8 @@ Created on Fri Jun  7 12:06:56 2024
 
 @author: Hadrien
 
-This script serves to extract each sheet of the source Excel to CSVs.
-The goal is to use those CSVs as simple, easy import sources into databases.
+This script serves to extract each sheet of a source Excel file to CSVs.
+The goal is to use this as one step in a workflow where data is prepared in Excel then exported into a database via CSVs. 
 """
 import pandas as pd
 from datetime import date
