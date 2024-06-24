@@ -11,8 +11,8 @@ import pandas as pd
 from datetime import date
 import os
 
-#Specify the name of the default source file here
-DEFAULT_SOURCE = "PowerBIExcelSource.xlsx"
+#input name of default source file here
+DEFAULT_SOURCE = "ExcelSource.xlsx"
 
 #set date to track when files were made
 DEFAULT_FOLDER = str(date.today())
@@ -24,8 +24,8 @@ def main():
 
 #verify the source then extract it to the folder
 def extract():
-    source_file = DEFAULT_SOURCE
-    print("The file to be processed is set by default to: " + source_file + "\n")
+    sourcefile = DEFAULT_SOURCE
+    print("The file to be processed is set by default to: " + sourcefile + "\n")
     print("Is this the file you want to process? (Y/N) ")
     #strip and upper the input to minimize error
     answer = str(input()).strip().upper()
@@ -33,17 +33,17 @@ def extract():
         answer = str(input("Please confirm 'Y' or 'N'. ")).strip().upper()
     if answer == "N":
         print("\nEnter the name of the source file including the .extension: ")   
-        source_file = input()
+        sourcefile = input()
         #check whether the source can be found to prevent FileNotFoundErrors
-        while not os.path.exists(source_file):
+        while not os.path.exists(sourcefile):
             print("\nThat file cannot be found in the folder. Please enter the name again: ")
-            source_file = str(input()).strip()
+            sourcefile = str(input()).strip()
     elif answer == "Y":
-            while not os.path.exists(source_file):
+            while not os.path.exists(sourcefile):
                 print("\nThat file cannot be found in the folder. Please add it and run the script again or enter a new file source: ")
-                source_file = str(input()).strip()
-    print("\nThe script will now extract the sheets from " + source_file)
-    return source_file
+                sourcefile = str(input()).strip()
+    print("\nThe script will now extract the sheets from " + sourcefile)
+    return sourcefile
 
 #create a new folder with the current date if it doesnt exist yet
 def folder():
@@ -59,9 +59,9 @@ def folder():
         os.makedirs(folderpath)
     return folderpath
 
-def write(source_file, folderpath):    
+def write(sourcefile, folderpath):    
     #reads for the source Excel
-    read_file = pd.read_excel(source_file, sheet_name=None, header=0)
+    read_file = pd.read_excel(sourcefile, sheet_name=None, header=0)
     #creates .csvs from the source file sheets and adds them to the folder
     for sheet_name, data in read_file.items():
         data.to_csv(f"{folderpath}/{sheet_name}.csv", index=False)
