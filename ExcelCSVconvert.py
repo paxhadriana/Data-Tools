@@ -18,9 +18,9 @@ DEFAULT_SOURCE = "ExcelSource.xlsx"
 DEFAULT_FOLDER = str(date.today())
 
 def main():
-    print("Hello friend user! \nThis script will export individual sheets from the source Excel to their own .csv files.\n")
+    intro()
     write(extract(), folder())
-    print("Extract complete. Have a nice day!")
+    outro()
 
 #verify the source then extract it to the folder
 def extract():
@@ -59,12 +59,22 @@ def folder():
         os.makedirs(folderpath)
     return folderpath
 
+#combine the extract and folder setting to create the csvs
 def write(sourcefile, folderpath):    
     #reads for the source Excel
     read_file = pd.read_excel(sourcefile, sheet_name=None, header=0)
     #creates .csvs from the source file sheets and adds them to the folder
     for sheet_name, data in read_file.items():
         data.to_csv(f"{folderpath}/{sheet_name}.csv", index=False)
+
+#defining the text appearing at the start and end of the script to introduce/confirm
+def intro():
+    print("Hello friend user!")
+    print("This script will export individual sheets from the source Excel to their own .csv files.")
+    print()
+
+def outro():
+    print("Extract complete. Have a nice day!")
 
 if __name__ == '__main__':
     main()
