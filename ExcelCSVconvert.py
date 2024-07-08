@@ -5,7 +5,8 @@ Created on Fri Jun  7 12:06:56 2024
 @author: Hadrien
 
 This script serves to extract each sheet of a source Excel file to CSVs.
-The goal is to use this as one step in a workflow where data is prepared in Excel then exported into a database via CSVs. 
+The goal is to use this as one step in a workflow where data is prepared
+in Excel then exported into a database via CSVs. 
 """
 import pandas as pd
 from datetime import date
@@ -19,7 +20,10 @@ DEFAULT_FOLDER = str(date.today())
 
 def main():
     intro()
-    write(extract(), folder())
+    while True:
+        write(extract(), folder())
+        if repeat_check() == False:
+            break
     outro()
 
 #verify the source then extract it to the folder
@@ -66,6 +70,17 @@ def write(sourcefile, folderpath):
     #creates .csvs from the source file sheets and adds them to the folder
     for sheet_name, data in read_file.items():
         data.to_csv(f"{folderpath}/{sheet_name}.csv", index=False)
+        
+#sets conditions for the script to loop or end
+def repeat_check():
+    print("Do you need to run the script again? Y/N")
+    repeatcheck = str(input()).strip().upper()  
+    if repeatcheck == "N":
+        print("Understood. The script will close.")
+        return False
+    else:
+        print("Understood. The script will now repeat.")
+    print()
 
 #defining the text appearing at the start and end of the script to introduce/confirm
 def intro():
