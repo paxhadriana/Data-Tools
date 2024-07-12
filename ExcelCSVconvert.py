@@ -73,7 +73,7 @@ def write(sourcefile, folderpath):
         
 #sets conditions for the script to loop or end
 def repeat_check():
-    print("Do you need to run the script again? Y/N")
+    print("Do you need to run the script again? (Y/N)")
     repeatcheck = str(input()).strip().upper()  
     if repeatcheck == "N":
         print("Understood. The script will close.")
