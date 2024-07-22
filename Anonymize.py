@@ -16,19 +16,21 @@ import pandas as pd
 DEFAULT_SOURCE = "ExcelSource.xlsx"
 
 def main():
-    
+    read()
+    anonymize()
 
 def read():
     sourcefile = DEFAULT_SOURCE
-    read_file = pd.read_excel(sourcefile, sheet_name=None, header=0)
+    target = pd.read_excel(sourcefile, sheet_name=0, header=0, usecols="A")
+    return target
     
 def newname():
     letters = string.ascii_letters
     newname = ( ''.join(random.choice(letters) for i in range(10)) )
     return newname
 
-
-
+def anonymize():
+    for row in target
 
 
 if __name__ == '__main__':
