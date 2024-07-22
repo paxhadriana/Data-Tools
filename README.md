@@ -1,8 +1,20 @@
-This repository is where I put scripts made to make my life easier when working with data.
+This repository is where I put scripts made to make my life easier when working with data. 
+The included scripts are as follows:
+
+# Anonymize
+## Objective
+This script aims to scramble and anonymize data by replacing names in an Excel sheet with randomly generated strings in order to limit risk when sharing files with external parties.
+An example use case is when sharing documents with vendors as examples during requirements collection.
+
+## To-Do
+- [ ] Basic core functionality: replace all name strings in a column with randomly generated strings
+- [ ] Allow user to specify which column(s) need to be anonymized
+- [ ] Maintain groups by randomizing a given name to the same result if it is found again to maintain aggregation possibilities
 
 # Excel-CSV convert
 ## Objective
-This script is used to extract .csv files from an Excel document's sheets.
+This script is used to extract .csv files from an Excel document's sheets. 
+The intended use case is as part of processes which move data from Excel to relational databases which ingest .csvs better.
 
 ## To-Do
 - [x] Allow user input to change default/hardcoded source file and destination folder
