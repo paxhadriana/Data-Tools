@@ -4,6 +4,7 @@ The included scripts are as follows:
 # Anonymize
 ## Objective
 This script aims to scramble and anonymize data by replacing names in an Excel sheet with randomly generated strings in order to limit risk when sharing files with external parties.
+
 An example use case is when sharing documents with vendors as examples during requirements collection.
 
 ## To-Do
@@ -14,6 +15,7 @@ An example use case is when sharing documents with vendors as examples during re
 # Excel-CSV convert
 ## Objective
 This script is used to extract .csv files from an Excel document's sheets. 
+
 The intended use case is as part of processes which move data from Excel to relational databases which ingest .csvs better.
 
 ## To-Do
