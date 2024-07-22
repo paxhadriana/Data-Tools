@@ -3,9 +3,9 @@ The included scripts are as follows:
 
 # Anonymize
 ## Objective
-This script aims to scramble and anonymize data by replacing names in an Excel sheet with randomly generated strings in order to limit risk when sharing files with external parties.
+This script aims to scramble and anonymize data by replacing names in an Excel sheet with randomly generated strings.
 
-An example use case is when sharing documents with vendors as examples during requirements collection.
+A possible use case is when internal documents are shared with external parties as part of information gathering, scope definition or requirements collection.
 
 ## To-Do
 - [ ] Basic core functionality: replace all name strings in a column with randomly generated strings
