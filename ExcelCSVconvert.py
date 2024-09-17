@@ -1,13 +1,11 @@
 # -*- coding: utf-8 -*-
 """
-Created on Fri Jun  7 12:06:56 2024
-
-@author: Hadrien
-
 This script serves to extract each sheet of a source Excel file to CSVs.
+
 The goal is to use this as one step in a workflow where data is prepared
-in Excel then exported into a database via CSVs. 
+in an Excel document then exported into a database via CSVs. 
 """
+
 import pandas as pd
 from datetime import date
 import os
@@ -26,8 +24,8 @@ def main():
             break
     outro()
 
-#verify the source then extract it to the folder
 def extract():
+    """Verifies the source then extracts it to the folder. Returns sourcefile."""
     sourcefile = DEFAULT_SOURCE
     print("The file to be processed is set by default to: " + sourcefile + "\n")
     print("Is this the file you want to process? (Y/N) ")
@@ -49,8 +47,9 @@ def extract():
     print("\nThe script will now extract the sheets from " + sourcefile)
     return sourcefile
 
-#create a new folder with the current date if it doesnt exist yet
 def folder():
+    """Sets the folder to which the .csvs will be extracted and returns folderpath.
+    By default, will use current date."""
     folderpath = DEFAULT_FOLDER
     print("\nBy default, the script will extract files to a folder named: " + folderpath + ".\nIs this OK? (Y/N)")
     answer = str(input()).strip().upper()
@@ -63,16 +62,16 @@ def folder():
         os.makedirs(folderpath)
     return folderpath
 
-#combine the extract and folder setting to create the csvs
-def write(sourcefile, folderpath):    
+def write(sourcefile, folderpath):
+    """Combines the extract and folder setting to create the csvs and place them in the folder."""    
     #reads for the source Excel
     read_file = pd.read_excel(sourcefile, sheet_name=None, header=0)
     #creates .csvs from the source file sheets and adds them to the folder
     for sheet_name, data in read_file.items():
         data.to_csv(f"{folderpath}/{sheet_name}.csv", index=False)
         
-#sets conditions for the script to loop or end
 def repeat_check():
+    """Sets conditions for the script to loop or end. Returns false if user responds N."""
     print("Do you need to run the script again? (Y/N)")
     repeatcheck = str(input()).strip().upper()  
     if repeatcheck == "N":
@@ -82,13 +81,14 @@ def repeat_check():
         print("Understood. The script will now repeat.")
     print()
 
-#defining the text appearing at the start and end of the script to introduce/confirm
 def intro():
-    print("Hello friend user!")
+    """Defines the text appearing at the start of the script to introduce/confirm what it does."""
+    print("Hello friend!")
     print("This script will export individual sheets from the source Excel to their own .csv files.")
     print()
 
 def outro():
+    """Defines the text appearing at the end of the script to introduce/confirm what it does."""
     print("Extract complete. Have a nice day!")
 
 if __name__ == '__main__':

@@ -1,5 +1,8 @@
-This repository is where I put scripts made to make my life easier when working with data. 
+This repository is where I put scripts inspired by my struggles manually wrangling data. 
 The included scripts are as follows:
+
+- [Anonymize](https://github.com/paxhadriana/Data-Tools#anonymize): Preparation stage
+- [Excel-CSV convert](https://github.com/paxhadriana/Data-Tools#excel-csv-convert): Basic functionality implemented
 
 # Anonymize
 ## Objective
@@ -21,5 +24,6 @@ The intended use case is as part of processes which move data from Excel to rela
 ## To-Do
 - [x] Allow user input to change default/hardcoded source file and destination folder
 - [x] Allow user to extract from several sources (**Partial**: script can now loop and run through sources in succession without ending unless confirmed)
+- [ ] Add some automated error catching (eg. if inputted source does not contain file extension, try accepted ones before invalidating)
 - [ ] Allow user to select specific sheets to extract
 - [ ] Allow user to target specific columns within a sheet to extract
