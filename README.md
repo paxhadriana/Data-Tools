@@ -4,8 +4,6 @@ The included scripts are as follows:
 - [Anonymize](https://github.com/paxhadriana/Data-Tools#anonymize): Preparation stage
 - [Excel-CSV convert](https://github.com/paxhadriana/Data-Tools#excel-csv-convert): Basic functionality implemented
 
-=======
-
 ## Anonymize
 ### Objective
 
